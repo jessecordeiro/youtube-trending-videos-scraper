@@ -33,9 +33,9 @@ Follow the steps below to start an instance of Chatr within minutes
 
 ## <a name="usage"></a>Usage
 ```python
-import youtube_trending_videos_scraper
+import youtube_trending_scraper
 
-youtube_trending_videos_scraper.Scraper.scrape()
+youtube_trending_scraper.Scraper.scrape()
 ```
 
 ## <a name="output"></a>Output
