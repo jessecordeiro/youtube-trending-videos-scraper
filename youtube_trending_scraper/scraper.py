@@ -37,7 +37,7 @@ class Scraper:
 			description_content = video_element.select("div.yt-lockup-description")
 			video_description = ""
 			if len(description_content) > 0:
-				video_description = description_content[0]
+				video_description = description_content[0].text
 			video_obj["video_desc"] = html.escape(str(video_description))
 			json_array.append(video_obj)
 
