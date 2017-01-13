@@ -44,7 +44,7 @@ youtube_trending_videos_scraper.Scraper.scrape()
   "profile_name": "Lorem ipsum", 
   "profile_url": "/user/loremipsumdolor", 
   "upload_date": "1 day ago", 
-  "video_desc": Lorem ipsum dolor sit amet, hymenaeos sodales in, scelerisque at.",
+  "video_desc": "Lorem ipsum dolor sit amet, hymenaeos sodales in, scelerisque at.",
   "video_thumbnail": "https://..",
   "video_time": "2:12", 
   "video_title": "Lorem ipsum dolor sit amet", 
