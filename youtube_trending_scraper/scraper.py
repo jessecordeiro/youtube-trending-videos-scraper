@@ -16,9 +16,17 @@ class Scraper:
 		json_array = []
 		response = requests.get(Scraper.URL)
 		soup = BeautifulSoup(response.text, "html.parser")
-		trending_videos = soup.find_all(attrs={"class": "yt-lockup-content"})
+		trending_videos = soup.find_all(attrs={"class": "expanded-shelf-content-item"})
 		for video_element in trending_videos:
-			video_obj = {}
+			video_obj = dict()
+			thumbnail = video_element.find(attrs={
+					"class": ["yt-thumb", "video-thumb"]
+					}).find(attrs={"class": "yt-thumb-simple"}).find("img")
+			# Fallback on data-thumb attr if present to avoid capturing gif instead of jpg
+			if thumbnail.get("data-thumb") is not None:
+				video_obj["video_thumbnail"] = thumbnail["data-thumb"]
+			else:
+				video_obj["video_thumbnail"] = thumbnail["src"]
 			title_content = video_element.find(attrs={"class": "yt-lockup-title"})
 			link_meta = title_content.find("a")
 			video_obj["video_url"] = link_meta.get("href")
