@@ -8,7 +8,7 @@ This is a Python scraper for YouTube's trending feed of videos.
 * [Usage](#usage)
 * [Output](#output)
 * [Contribute](#contribute)
-* [License](https://github.com/jessecordeiro/chatr-web-client/blob/master/LICENSE)
+* [License](https://github.com/jessecordeiro/youtube-trending-videos-scraper/blob/master/LICENSE)
 
 ## <a name="req/install"></a>Requirements/Installation
 
