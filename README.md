@@ -6,6 +6,7 @@ This is a Python scraper for YouTube's trending feed of videos.
 
 * [Requirements/Installation](#req/install)
 * [Usage](#usage)
+* [Output](#output)
 * [Contribute](#contribute)
 * [License](https://github.com/jessecordeiro/chatr-web-client/blob/master/LICENSE)
 
@@ -35,6 +36,21 @@ Follow the steps below to start an instance of Chatr within minutes
 import youtube_trending_videos_scraper
 
 youtube_trending_videos_scraper.Scraper.scrape()
+```
+
+## <a name="output"></a>Output
+```js
+[{
+  "profile_name": "Lorem ipsum", 
+  "profile_url": "/user/loremipsumdolor", 
+  "upload_date": "1 day ago", 
+  "video_desc": Lorem ipsum dolor sit amet, hymenaeos sodales in, scelerisque at.",
+  "video_thumbnail": "https://..",
+  "video_time": "2:12", 
+  "video_title": "Lorem ipsum dolor sit amet", 
+  "video_url": "/watch?v=loR3MIpSUMgd", 
+  "view_count": "3,151,740"
+}]
 ```
 
 ## <a name="contribute"></a>Contribute
