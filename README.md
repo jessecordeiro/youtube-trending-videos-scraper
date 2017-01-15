@@ -1,6 +1,6 @@
 ## Youtube Trending Videos Scraper
 
-This is a Python scraper for YouTube's trending feed of videos.
+This is a Python scraper for YouTube's feed of videos that are trending.
 
 ## Contents
 
