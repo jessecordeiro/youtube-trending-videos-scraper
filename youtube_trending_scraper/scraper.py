@@ -2,6 +2,7 @@ import requests
 import json
 import html
 from bs4 import BeautifulSoup
+from requests.exceptions import ConnectionError
 
 
 class Scraper:
@@ -9,12 +10,18 @@ class Scraper:
 	Scraper for the trending page on YouTube.
 	"""
 
-	URL = "https://www.youtube.com/feed/trending"
+	URL = "https://www.youtube.{0}/feed/trending"
 
 	@staticmethod
-	def scrape():
+	def scrape(country_code="com"):
 		json_array = []
-		response = requests.get(Scraper.URL)
+
+		try:
+			response = requests.get(Scraper.URL.format(country_code))
+		except ConnectionError as err:
+			json_array.append({"error": str(err)})
+			return json.dumps(json_array)
+
 		soup = BeautifulSoup(response.text, "html.parser")
 		trending_videos = soup.find_all(attrs={"class": "expanded-shelf-content-item"})
 		for video_element in trending_videos:
