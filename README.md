@@ -12,8 +12,6 @@ This is a Python scraper for YouTube's feed of videos that are trending.
 
 ## <a name="req/install"></a>Requirements/Installation
 
-Follow the steps below to start an instance of Chatr within minutes
-
 1. **Install requirement(s):**
   + [Python 3.4.3](https://www.python.org/downloads/release/python-343/)
   + [pip](https://pip.pypa.io/en/stable/installing/)
