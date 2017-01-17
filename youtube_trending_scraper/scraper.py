@@ -10,14 +10,14 @@ class Scraper:
 	Scraper for the trending page on YouTube.
 	"""
 
-	URL = "https://www.youtube.{0}/feed/trending"
+	URL = "https://www.youtube.{0}"
 
 	@staticmethod
 	def scrape(country_code="com"):
 		json_array = []
 
 		try:
-			response = requests.get(Scraper.URL.format(country_code))
+			response = requests.get(Scraper.URL.format(country_code) + "/feed/trending")
 		except ConnectionError as err:
 			json_array.append({"error": str(err)})
 			return json.dumps(json_array)
@@ -38,7 +38,11 @@ class Scraper:
 			link_meta = title_content.find("a")
 			video_obj["video_url"] = link_meta.get("href")
 			video_obj["video_title"] = link_meta.get("title")
-			video_obj["video_time"] = title_content.find(attrs={"class": "accessible-description"}).string.split(": ")[1][:-1]
+			video_time = title_content.select("span.accessible-description")
+			if len(video_time) != 0:
+				video_obj["video_time"] = video_time[0].text
+			else:
+				video_obj["video_time"] = "LIVE NOW"
 
 			profile_content = video_element.find(attrs={"class": "yt-lockup-byline"})
 			profile_meta = profile_content.find("a")
@@ -46,8 +50,13 @@ class Scraper:
 			video_obj["profile_name"] = profile_meta.string
 
 			meta_info = video_element.find(attrs={"class": "yt-lockup-meta-info"})
-			video_obj["upload_date"] = meta_info.contents[0].string
-			video_obj["view_count"] = meta_info.contents[1].string.split(" ")[0]
+			if len(meta_info.contents) > 1:
+				video_obj["upload_date"] = meta_info.contents[0].string
+				video_obj["view_count"] = meta_info.contents[1].string.split(" ")[0]
+			else:
+				video_page_response = requests.get(Scraper.URL.format(country_code) + video_obj["video_url"])
+				video_obj["upload_date"] = BeautifulSoup(video_page_response.text, "html.parser").select("strong.watch-time-text")[0].string
+				video_obj["view_count"] = meta_info.contents[0].string
 
 			description_content = video_element.select("div.yt-lockup-description")
 			video_description = ""
