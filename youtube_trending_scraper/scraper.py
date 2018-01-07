@@ -55,7 +55,11 @@ class Scraper:
 				video_obj["view_count"] = meta_info.contents[1].string.split(" ")[0]
 			else:
 				video_page_response = requests.get(Scraper.URL.format(country_code) + video_obj["video_url"])
-				video_obj["upload_date"] = BeautifulSoup(video_page_response.text, "html.parser").select("strong.watch-time-text")[0].string
+				parsed_response = BeautifulSoup(video_page_response.text, "html.parser")
+				if parsed_response.find("span", class_="date"):
+					video_obj["upload_date"] = parsed_response.find("span", class_="date").string
+				elif parsed_response.find("strong", class_="watch-time-text"):
+					video_obj["upload_date"] = parsed_response.find("strong", class_="watch-time-text").string
 				video_obj["view_count"] = meta_info.contents[0].string
 
 			description_content = video_element.select("div.yt-lockup-description")
